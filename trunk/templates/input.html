@@ -1,0 +1,16 @@
+$def with()
+
+<form action="/" method="post">
+	<table>
+		<tbody>
+			$for i in range(1, 9):
+				<tr>
+				$for j in range(1, 9):
+					<td>
+						<input name="($i,$j)" type="text" class="cell">
+					</td>
+				</tr>	
+		</tbody>
+	</table>
+	<input type="submit" value="Submit" />
+</form>
