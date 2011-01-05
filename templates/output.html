@@ -1,0 +1,14 @@
+$def with(result)
+
+<table>
+	<tbody>
+		$for i in range(1, 9):
+			<tr>
+			$for j in range(1, 9):
+				<td>
+					<input type="text" class="cell" value="$result[(i, j)]">
+				</td>
+			</tr>	
+	</tbody>
+</table>
+<a href="/"> Input a new puzzle </a>
