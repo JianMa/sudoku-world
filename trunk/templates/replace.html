@@ -1,0 +1,53 @@
+$def with()
+
+$var css:	replace.css
+$var js:	replace.js
+
+<div id="original">
+	<table>
+		<tbody>
+		$for i in range(N):
+			<tr>
+			$for j in range(N):
+				<td>
+					<input id="o$i$j" type="text" class="cell">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div id="map">
+	<table>
+		<tbody>
+		$for i in range(1, N + 1):
+			<tr>
+				<td>
+					$i
+				</td>
+				<td>
+					<input id="$i" type="text" class="cell">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div id="target">
+	<table>
+		<tbody>
+		$for i in range(N):
+			<tr>
+			$for j in range(N):
+				<td>
+					<input id="t$i$j" type="text" class="cell">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<input id="submit" type="button" value="Submit">
+
+<div id="test">
+</div>

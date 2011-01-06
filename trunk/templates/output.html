@@ -1,14 +1,17 @@
 $def with(result)
 
+$var css:	index.css
+$var js:	
+
 <table>
 	<tbody>
-		$for i in range(1, 9):
-			<tr>
-			$for j in range(1, 9):
-				<td>
-					<input type="text" class="cell" value="$result[(i, j)]">
-				</td>
-			</tr>	
+	$for i in range(N):
+		<tr>
+		$for j in range(N):
+			<td>
+				<input type="text" class="cell" value="$result[i][j].value">
+			</td>
+		</tr>	
 	</tbody>
 </table>
 <a href="/"> Input a new puzzle </a>
