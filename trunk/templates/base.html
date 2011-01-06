@@ -2,7 +2,7 @@ $def with(content)
 
 $# code only works in webpy v0.34
 $code:
-	cssFiles = []
+	cssFiles = [u'default.css']
 	cssFiles.extend(content.css.split())
 	jsFiles = [u'jquery/1.4.4.min.js']
 	jsFiles.extend(content.js.split())
