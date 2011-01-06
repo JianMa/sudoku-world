@@ -1,28 +1,46 @@
 import web
+from sudoku import *
 
 urls = (
-		'/', 'index'
+		r'/',			'index',
+		r'/replace/',	'replace'
 )
 
+g = globals()
+g['N'] = N
 app = web.application(urls, globals())
-render = web.template.render('templates', base = "base")
+render = web.template.render('templates', globals = g, base = 'base')
 
 class index:
-	"""The index page: show main page of sudoku"""
+	"""The index page: shows main page of sudoku"""
 	def GET(self):
+		"""displays a page to input a sudoku puzzle"""
 		return render.input()
 	
 	def POST(self):
+		"""displays a page to output the the sudoku solution"""
 		data = web.input()
 		
-		result = {}
-		for i in range(1, 9):
-			for j in range(1, 9):
-				result[(i, j)] = data.get("(%d,%d)" % (i, j), 0)
-		
-		#resovle(result)
-		
-		return render.output(result)
+		mySudoku = Sudoku()
+		puzzle = mySudoku.puzzle
+		for i in range(N):
+			for j in range(N):
+				value = data.get('(%d,%d)' % (i, j), None)
+				value = int(value) if value else 0
+				
+				puzzle[i][j].value = value
+				puzzle[i][j].const = (value != 0)
+				
+		mySudoku.initialize()
+		mySudoku.resolve()
+		web.debug(mySudoku.solution)
+		return render.output(puzzle)
 
-if __name__ == "__main__":
+class replace:
+	"""The replace page: do the map(replace) function by Javascript"""
+	def GET(self):
+		return render.replace()
+
+if __name__ == '__main__':
 	app.run()
+

@@ -1,13 +1,22 @@
 $def with(content)
 
+$# code only works in webpy v0.34
+$code:
+	cssFiles = []
+	cssFiles.extend(content.css.split())
+	jsFiles = [u'jquery/1.4.4.min.js']
+	jsFiles.extend(content.js.split())
+
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+	$for cssFile in cssFiles:
+		<link rel="stylesheet" type="text/css" href="/static/css/$cssFile">
 	</head>
 	
 	<body>
 		$:content
-		
-		<img src="/static/img/sudoku.jpg">
 	</body>
+	
+$for jsFile in jsFiles:
+	<script type="text/javascript" src="/static/js/$jsFile"></script>
 </html>
