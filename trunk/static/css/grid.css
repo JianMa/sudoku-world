@@ -1,0 +1,49 @@
+div.grid table {
+	border-collapse: collapse;
+}
+
+div.grid table td.cell {
+	width: 30px;
+	height: 30px;
+	border: 1px solid black;
+}
+
+div.grid table td.cell input {
+	width: inherit;
+	height: inherit;
+}
+
+div.grid table td.coordinate {
+	width: 30px;
+	height: 30px;
+	color: red;
+}
+
+div.grid table td.topborder {
+	border-top: 3px solid black;
+}
+
+div.grid table td.rightborder {
+	border-right: 3px solid black;
+}
+
+div.grid table td.bottomborder {
+	border-bottom: 3px solid black;
+}
+
+div.grid table td.leftborder {
+	border-left: 3px solid black;
+}
+
+div.grid table td.even {
+	background-color: white;
+}
+
+div.grid table td.odd {
+	background-color: 6495ed;
+}
+
+div.grid table input {
+	border: none;
+	background: transparent;
+}
