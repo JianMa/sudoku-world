@@ -13,6 +13,7 @@ gridrender = web.template.render('templates', globals = g)
 g['N'] = N
 g['squ'] = squ
 g['gridrender'] = gridrender
+g['hasattr'] = hasattr
 
 class index:
 	"""The index page: shows main page of sudoku"""
@@ -28,14 +29,14 @@ class index:
 		puzzle = mySudoku.puzzle
 		for i in range(N):
 			for j in range(N):
-				value = data.get('(%d,%d)' % (i, j), None)
+				value = data.get('p%d%d' % (i, j), None)
 				value = int(value) if value else 0
 				
 				puzzle[i][j].value = value
 				puzzle[i][j].const = (value != 0)
 				
 		mySudoku.initialize()
-		mySudoku.resolve()
+#		mySudoku.resolve()
 		web.debug(mySudoku.solution)
 		return render.output(puzzle)
 
