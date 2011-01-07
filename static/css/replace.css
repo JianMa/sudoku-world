@@ -3,27 +3,6 @@ div#original, div#map, div#target {
 	float: left
 }
 
-div#original, div#target {
-//	width: 300px;
-}
-
-div#original table,
-div#target table {
-	border-collapse: collapse;
-}
-
-div#original table,
-div#original table th,
-div#original table th td,
-div#target table,
-div#target table th,
-div#target table th td {
-	border: 1px solid black;
-}
-
-div#original table input {
-}
-
 div#map {
 	width: 200px;
 }
@@ -37,23 +16,13 @@ div#map table td {
 	width: 40px;
 }
 
-table .cell {
-	width: 30px;
-	height: 30px;
-}
-/*
-table .cell input {
+div#map table input {
 	width: inherit;
-	height: inherit;
-}*/
+}
 
 input#submit {
 	display: block;
 	clear: both;
 	margin: 0px auto;
-}
-
-td.coordinate {
-	color: red;
 }
 

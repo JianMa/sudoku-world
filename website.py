@@ -7,9 +7,12 @@ urls = (
 )
 
 g = globals()
-g['N'] = N
 app = web.application(urls, globals())
 render = web.template.render('templates', globals = g, base = 'base')
+gridrender = web.template.render('templates', globals = g)
+g['N'] = N
+g['squ'] = squ
+g['gridrender'] = gridrender
 
 class index:
 	"""The index page: shows main page of sudoku"""

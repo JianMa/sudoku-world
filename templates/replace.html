@@ -1,37 +1,9 @@
 $def with()
 
-$var css:	replace.css
+$var css:	grid.css replace.css
 $var js:	replace.js
 
-<div id="original">
-	<table>
-		<caption>
-			Input the Original sudoku puzzle here:
-		</caption>
-		<tbody>
-			<tr>
-				<td>
-				</td>
-			$for j in range(N):
-				<td class="coordinate">
-					$j
-				</td>
-			</tr>
-			
-		$for i in range(N):
-			<tr>
-				<td class="coordinate">
-					$i
-				</td>
-			$for j in range(N):
-				<td>
-					<input id="o$i$j" type="text" class="cell">
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-
+$:gridrender.grid("original", "Input the Original sudoku puzzle here:", None, "o")
 <div id="map">
 	<table>
 		<caption>
@@ -54,33 +26,5 @@ $var js:	replace.js
 	</table>
 	<input id="submit" type="button" value="Submit">
 </div>
-
-<div id="target">
-	<table>
-		<caption>
-			Click "Submit" to get the result here:
-		</caption>
-		<tbody>
-			<tr>
-				<td>
-				</td>
-			$for j in range(N):
-				<td class="coordinate">
-					$j
-				</td>
-			</tr>
-			
-		$for i in range(N):
-			<tr>
-				<td class="coordinate">
-					$i
-				</td>
-			$for j in range(N):
-				<td>
-					<input id="t$i$j" type="text" class="cell">
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+$:gridrender.grid("target", "Click 'Submit' to get the result here:", None, "t")
 

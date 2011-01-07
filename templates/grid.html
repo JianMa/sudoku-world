@@ -1,0 +1,37 @@
+$def with(id, caption, grid, type)
+
+<div id="$id" class="grid">
+	<table>
+		<caption>
+			$caption
+		</caption>
+		<tbody>
+			<tr>
+				<td>
+				</td>
+			$for j in range(N):
+				<td class="coordinate">
+					$j
+				</td>
+			</tr>
+			
+		$for i in range(N):
+			<tr>
+				<td class="coordinate">
+					$i
+				</td>
+				
+				$ classtop = " topborder" if i % 3 == 0 else ""
+				$ classbottom = " bottomborder" if i % 3 == 2 else ""
+			$for j in range(N):
+				$ classleft = " leftborder" if j % 3 == 0 else ""
+				$ classright = " rightborder" if j % 3 == 2 else ""
+				$ classsquare = " even" if squ(i, j) % 2 == 0 else " odd"
+				<td class="cell$classtop$classright$classbottom$classleft$classsquare">
+					<input id="$type$i$j" type="text" value="${grid[i][j].get('value', '') if grid else ''}">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
