@@ -1,23 +1,13 @@
 $def with()
 
-$var css:	index.css
+$var css:	index.css grid.css
 $var js:	
 
 <h1> I am sorry. This page does not work right now </h1>
 <h1> I will fix it ASAP </h1>
 
 <form action="/" method="post">
-	<table>
-		<tbody>
-			$for i in range(N):
-				<tr>
-				$for j in range(N):
-					<td>
-						<input name="($i,$j)" type="text" class="cell">
-					</td>
-				</tr>
-		</tbody>
-	</table>
+	$:gridrender.grid("puzzle", "Input the sudoku puzzle you want to solve here:", None, "p")
+	
 	<input type="submit" value="Submit" />
-	<img src="/static/img/sudoku.jpg">
 </form>

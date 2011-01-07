@@ -28,7 +28,7 @@ $def with(id, caption, grid, type)
 				$ classright = " rightborder" if j % 3 == 2 else ""
 				$ classsquare = " even" if squ(i, j) % 2 == 0 else " odd"
 				<td class="cell$classtop$classright$classbottom$classleft$classsquare">
-					<input id="$type$i$j" type="text" value="${grid[i][j].get('value', '') if grid else ''}">
+					<input id="$type$i$j" name="$type$i$j" type="text" value="${grid[i][j].value if hasattr(grid[i][j], 'value') else ''}">
 				</td>
 			</tr>
 		</tbody>

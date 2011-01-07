@@ -1,17 +1,8 @@
 $def with(result)
 
-$var css:	index.css
+$var css:	index.css grid.css
 $var js:	
 
-<table>
-	<tbody>
-	$for i in range(N):
-		<tr>
-		$for j in range(N):
-			<td>
-				<input type="text" class="cell" value="$result[i][j].value">
-			</td>
-		</tr>	
-	</tbody>
-</table>
+$:gridrender.grid("solution", "Input the sudoku puzzle you want to solve here:", result, "s")
+
 <a href="/"> Input a new puzzle </a>
