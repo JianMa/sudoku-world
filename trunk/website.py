@@ -9,11 +9,11 @@ urls = (
 g = globals()
 app = web.application(urls, globals())
 render = web.template.render('templates', globals = g, base = 'base')
-gridrender = web.template.render('templates', globals = g)
+gridrender = web.template.render('templates', globals = g, builtins = __builtins__)
 g['N'] = N
 g['squ'] = squ
 g['gridrender'] = gridrender
-g['hasattr'] = hasattr
+
 
 class index:
 	"""The index page: shows main page of sudoku"""
@@ -22,7 +22,7 @@ class index:
 		return render.input()
 	
 	def POST(self):
-		"""displays a page to output the the sudoku solution"""
+		"""displays a page to output the the sudoku solutions"""
 		data = web.input()
 		
 		mySudoku = Sudoku()
@@ -36,9 +36,9 @@ class index:
 				puzzle[i][j].const = (value != 0)
 				
 		mySudoku.initialize()
-#		mySudoku.resolve()
-		web.debug(mySudoku.solution)
-		return render.output(puzzle)
+		mySudoku.resolve()
+		
+		return render.output(mySudoku.solutions)
 
 class replace:
 	"""The replace page: do the map(replace) function by Javascript"""

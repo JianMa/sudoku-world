@@ -1,8 +1,11 @@
-$def with(result)
+$def with(solutions)
 
 $var css:	index.css grid.css
 $var js:	
 
-$:gridrender.grid("solution", "Input the sudoku puzzle you want to solve here:", result, "s")
+<p> The solution for your input sudoku puzzle: </p>
+
+$for solution in solutions:
+	$:gridrender.grid("solution", "solution %d:" % loop.index, solution, "s%d" % loop.index)
 
 <a href="/"> Input a new puzzle </a>
