@@ -4,7 +4,7 @@ from time import clock
 N = 9
 
 def squ(x, y):
-	return x // 3 * 2 + y // 3
+	return x // 3 * 3 + y // 3
 	
 def Print(puzzle):
 	print '     0 1 2   3 4 5   6 7 8'
@@ -119,7 +119,6 @@ class Sudoku:
 							self.puzzle[i][j] = 0
 				
 				if result:
-					print 'exit'
 					break
 				
 		return result
