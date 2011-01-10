@@ -26,19 +26,15 @@ class index:
 		data = web.input()
 		
 		mySudoku = Sudoku()
-		puzzle = mySudoku.puzzle
 		for i in range(N):
 			for j in range(N):
 				value = data.get('p%d%d' % (i, j), None)
 				value = int(value) if value else 0
+				mySudoku.setValue(i, j, value)
 				
-				puzzle[i][j].value = value
-				puzzle[i][j].const = (value != 0)
-				
-		mySudoku.initialize()
 		mySudoku.resolve()
 		
-		return render.output(mySudoku.solutions)
+		return render.output(mySudoku.solution)
 
 class replace:
 	"""The replace page: do the map(replace) function by Javascript"""
