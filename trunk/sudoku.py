@@ -1,9 +1,10 @@
 import copy
 from time import clock
 
-print clock()
-
 N = 9
+
+def squ(x, y):
+	return x // 3 * 2 + y // 3
 	
 def Print(puzzle):
 	print '     0 1 2   3 4 5   6 7 8'
@@ -124,7 +125,9 @@ class Sudoku:
 		return result
 	
 	def resolve(self):
+		print clock()
 		self.do(0, 0, 1)
+		print clock()
 
 
 if __name__ == '__main__':
@@ -207,6 +210,5 @@ if __name__ == '__main__':
 	else:
 		print 'no solution'
 	
-	print clock()
 	print 'press enter to end'
 	raw_input()
