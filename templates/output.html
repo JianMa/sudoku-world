@@ -1,11 +1,13 @@
-$def with(solutions)
+$def with(solution)
 
 $var css:	index.css grid.css
 $var js:	
 
 <p> The solution for your input sudoku puzzle: </p>
 
-$for solution in solutions:
-	$:gridrender.grid("solution", "solution %d:" % loop.index, solution, "s%d" % loop.index)
+$if solution:
+	$:gridrender.grid("solution", "One of Solutions", solution, "s")
+$else:
+	$:gridrender.grid("solution", "No Solutions:", solution, "s")
 
 <a href="/"> Input a new puzzle </a>
