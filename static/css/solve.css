@@ -1,0 +1,5 @@
+div.grid {
+	width: 1000px;
+	display: inline-block;
+	vertical-align: top;
+}
