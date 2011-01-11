@@ -20,6 +20,7 @@ g['gridrender'] = gridrender
 class index:
 	"""The index page: main page shows the links to all the functionality"""
 	def GET(self):
+		web.debug("why?")
 		return render.index()
 
 class solve:
