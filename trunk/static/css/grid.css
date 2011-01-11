@@ -1,5 +1,7 @@
 div.grid table {
+	display: inline-block;
 	border-collapse: collapse;
+	margin: 0px auto;
 }
 
 div.grid table td.cell {

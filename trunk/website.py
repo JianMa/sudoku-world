@@ -3,7 +3,9 @@ from sudoku import *
 
 urls = (
 		r'/',			'index',
-		r'/replace/',	'replace'
+		r'/solve/',		'solve',
+		r'/replace/',	'replace',
+		r'/demo/',		'demo'
 )
 
 g = globals()
@@ -16,7 +18,12 @@ g['gridrender'] = gridrender
 
 
 class index:
-	"""The index page: shows main page of sudoku"""
+	"""The index page: main page shows the links to all the functionality"""
+	def GET(self):
+		return render.index()
+
+class solve:
+	"""The solve page: shows a page to solve sudoku in a fast way"""
 	def GET(self):
 		"""displays a page to input a sudoku puzzle"""
 		return render.input()
@@ -40,6 +47,11 @@ class replace:
 	"""The replace page: do the map(replace) function by Javascript"""
 	def GET(self):
 		return render.replace()
+
+class demo:
+	"""The demo page: show how to solve a sudoku puzzle step by step using brute-force method"""
+	def GET(self):
+		return render.demo()
 
 if __name__ == '__main__':
 	app.run()

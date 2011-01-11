@@ -1,9 +1,10 @@
 $def with()
 
+$var title:	Replace
 $var css:	grid.css replace.css
 $var js:	grid.js replace.js
 
-$:gridrender.grid("original", "Input the Original sudoku puzzle here:", None, "o")
+$:gridrender.grid("puzzle", "Input the sudoku puzzle you want to solve:", None, "p")
 
 <div id="map">
 	<table>
@@ -28,5 +29,5 @@ $:gridrender.grid("original", "Input the Original sudoku puzzle here:", None, "o
 	<input id="submit" type="button" value="Submit">
 </div>
 
-$:gridrender.grid("target", "Click 'Submit' to get the result here:", None, "t")
+$:gridrender.grid("solution", "Click 'Submit' to get the solution:", None, "s")
 

@@ -1,15 +1,14 @@
-div#original, div#map, div#target {
-//	display: block;
-	float: left;
+div#puzzle, div#map, div#solution {
+	display: inline-block;
 	height: 400px;
 }
 
-div#original, div#target {
+div#puzzle, div#solution {
 	width: 400px;
 }
 
-div#original table,
-div#target table {
+div#puzzle table,
+div#solution table {
 	width: 380px;
 }
 

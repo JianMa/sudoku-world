@@ -1,0 +1,8 @@
+div#puzzle, div#demo {
+	display: inline-block;
+	width: 480px;
+}
+
+div#demo td.conflict {
+	background-color: red;
+}

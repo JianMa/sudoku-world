@@ -1,0 +1,12 @@
+$def with()
+
+$var title:	Demo
+$var css:	grid.css demo.css
+$var js:	grid.js demo.js
+
+<div>
+	$:gridrender.grid("puzzle", "Input the sudoku puzzle you want to demo:", None, "p")
+	$:gridrender.grid("demo", "Click 'Demo' to see the proecess:", None, "d")
+</div>
+
+<input id="demo" type="button" value="Demo" />
