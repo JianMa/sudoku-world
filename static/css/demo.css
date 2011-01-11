@@ -1,6 +1,7 @@
 div#puzzle, div#demo {
 	display: inline-block;
 	width: 480px;
+	vertical-align: top;
 }
 
 div#demo td.conflict {

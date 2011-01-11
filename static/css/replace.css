@@ -1,24 +1,20 @@
 div#puzzle, div#map, div#solution {
 	display: inline-block;
 	height: 400px;
+	vertical-align: top;
 }
 
 div#puzzle, div#solution {
 	width: 400px;
 }
 
-div#puzzle table,
-div#solution table {
-	width: 380px;
-}
-
 div#map {
-	width: 200px;
+	width: 180px;
 }
 
 div#map table {
-	margin: 0px auto;
-	width: 150px;
+//	margin: 0px auto;
+//	width: 150px;
 }
 
 div#map table td {
@@ -30,8 +26,6 @@ div#map table input {
 }
 
 input#submit {
-	display: block;
-	clear: both;
+	display: inline-block;
 	margin: 0px auto;
 }
-

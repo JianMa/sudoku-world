@@ -100,6 +100,7 @@ function IsValidSquare() {
 }
 
 function IsValidPuzzle() {
+	$(".conflict").removeClass("conflict");
 	return IsValidRow() && IsValidCol() && IsValidSquare();
 }
 
