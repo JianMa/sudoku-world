@@ -8,3 +8,17 @@ body {
 	margin: 50px auto;
 }
 
+div#header {
+	clear: both;
+}
+
+div#content {
+	margin: 20px auto;
+	height: auto;
+	clear: both;
+}
+
+div#footer {
+	margin: 20px auto;
+	clear: both;
+}

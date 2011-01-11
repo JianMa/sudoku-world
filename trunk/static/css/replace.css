@@ -1,6 +1,16 @@
 div#original, div#map, div#target {
-	display: block;
-	float: left
+//	display: block;
+	float: left;
+	height: 400px;
+}
+
+div#original, div#target {
+	width: 400px;
+}
+
+div#original table,
+div#target table {
+	width: 380px;
 }
 
 div#map {

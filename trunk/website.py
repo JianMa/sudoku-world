@@ -26,13 +26,13 @@ class index:
 		data = web.input()
 		
 		mySudoku = Sudoku()
-		for i in range(N):
-			for j in range(N):
-				value = data.get('p%d%d' % (i, j), None)
-				value = int(value) if value else 0
-				mySudoku.setValue(i, j, value)
-				
-		mySudoku.resolve()
+		for (i, j) in [(i, j) for i in range(N) for j in range(N)]:
+			value = data.get('p%d%d' % (i, j), None)
+			value = int(value) if value else 0
+			if not mySudoku.setValue(i, j, value):
+				break
+		else:
+			mySudoku.resolve()
 		
 		return render.output(mySudoku.solution)
 
