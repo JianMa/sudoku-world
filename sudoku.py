@@ -30,7 +30,7 @@ c = 0
 class Sudoku:
 	def __init__(self):
 		self.puzzle = [[0] * N for i in range(N)]
-		self.possible = [[set(range(1, N + 1)) for j in range(N)] for i in range(N)]
+		self.possible = [[range(1, N + 1) for j in range(N)] for i in range(N)]
 		self.step = [[0] * N for i in range(N)]
 		
 		self.solution = None
@@ -42,7 +42,7 @@ class Sudoku:
 		
 		if value in self.possible[x][y]:
 			self.puzzle[x][y] = value
-			self.possible[x][y].clear()
+			self.possible[x][y] = []
 			self.step[x][y] = step
 		else:
 			return False
@@ -76,7 +76,7 @@ class Sudoku:
 			for j in range(N):
 				possible = self.possible[i][j]
 				if len(possible) == 1:
-					if not self.setValue(i, j, list(possible)[0], step):
+					if not self.setValue(i, j, possible[0], step):
 						return False
 		
 		return True

@@ -11,14 +11,14 @@ $def with(id, caption, grid, type)
 				</td>
 			$for j in range(N):
 				<td class="coordinate">
-					$j
+					$(j + 1)
 				</td>
 			</tr>
 			
 		$for i in range(N):
 			<tr>
 				<td class="coordinate">
-					$i
+					$(chr(ord('A') + i))
 				</td>
 				
 				$ classtop = " topborder" if i % 3 == 0 else ""
