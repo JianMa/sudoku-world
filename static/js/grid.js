@@ -1,4 +1,4 @@
-// Javascript code
+// Javascript Document
 
 /*
  * This file contains code that implements the handlers for an editable grid
@@ -26,7 +26,7 @@ $(document).ready(function() {
 	$("div.grid.editable").each(function(grid_index, grid) {
 		$("td", grid).each(function(td_index, td) {
 			var id = $(td).attr("id");
-			var type = id.charAt(0);
+			type = id.charAt(0);
 			var loc = new Location(parseInt(id.charAt(1)), parseInt(id.charAt(2)));
 			
 			$("input", td).keydown(function(e) {
@@ -50,14 +50,13 @@ $(document).ready(function() {
 					default:
 						return;
 				}
-				
 				e.preventDefault();
 				$(TdInput(type, loc.x, loc.y), grid).select();
 			}).keyup(function(e) {
 				ValidateGrid(grid, type);
 			});
-			ValidateGrid(grid, type);
 		});
+		ValidateGrid(grid, type);
 	});
 });
 
