@@ -50,6 +50,10 @@ div.grid table td.cell.conflict {
 	background-color: red;
 }
 
+div.grid table td.cell.const {
+	background-color: grey;
+}
+
 div.grid table input {
 	border: none;
 	background: transparent;
