@@ -24,12 +24,12 @@ function TdInput(type, x, y) {
 
 $(document).ready(function() {
 	$("div.grid.editable").each(function(grid_index, grid) {
-		$("td", grid).each(function(td_index, td) {
-			var id = $(td).attr("id");
-			type = id.charAt(0);
-			var loc = new Location(parseInt(id.charAt(1)), parseInt(id.charAt(2)));
-			
+		$("td.cell", grid).each(function(td_index, td) {
 			$("input", td).keydown(function(e) {
+				var id = $(td).attr("id");
+				var type = id.charAt(0);
+				var loc = new Location(parseInt(id.charAt(1)), parseInt(id.charAt(2)));
+				
 				switch (e.which) {
 					case 37:	// left
 						MoveInBoundary(loc, 0, -1);
@@ -56,6 +56,7 @@ $(document).ready(function() {
 				ValidateGrid(grid, type);
 			});
 		});
+		var type = $("td.cell", grid).attr("id").charAt(0);
 		ValidateGrid(grid, type);
 	});
 });
