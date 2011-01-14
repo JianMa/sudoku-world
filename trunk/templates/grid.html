@@ -1,6 +1,6 @@
-$def with(id, caption, grid, type)
+$def with(id, gridclass, caption, grid, type)
 
-<div id="$id" class="grid">
+<div id="$id" class="grid $gridclass">
 	<table>
 		<caption>
 			$caption
@@ -28,8 +28,8 @@ $def with(id, caption, grid, type)
 				$ classright = " rightborder" if j % 3 == 2 else ""
 				$ classsquare = " even" if squ(i, j) % 2 == 0 else " odd"
 				$ value = grid[i][j] if grid and grid[i][j] else ''
-				<td class="cell$classtop$classright$classbottom$classleft$classsquare">
-					<input id="$type$i$j" name="$type$i$j" type="text" value="$value">
+				<td id="$type$i$j" class="cell$classtop$classright$classbottom$classleft$classsquare">
+					<input name="$type$i$j" type="text" value="$value">
 				</td>
 			</tr>
 		</tbody>
