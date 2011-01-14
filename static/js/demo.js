@@ -1,12 +1,13 @@
-// Javascript code
+// Javascript Document
 
+// TdInput is defined in grid.js
 var grid;
 $(document).ready(function() {
 	$("input#demo").removeAttr("disabled");
 	$("input#demo").click(function() {
 		InitializeGrid();
 		CopyPuzzleToDemo();
-		if (IsValidPuzzle()) {
+		if (ValidateGrid($("div#puzzle"))) {
 			Demo();
 		}
 	});
@@ -14,10 +15,10 @@ $(document).ready(function() {
 
 function InitializeGrid() {
 	grid = new Array();
-	for (i = 0; i < gridN; i++) {
+	for (i = 0; i < GridN; i++) {
 		grid[i] = new Array();
-		for (j = 0; j < gridN; j++) {
-			var p = "div#puzzle table input#p" + i + j;
+		for (j = 0; j < GridN; j++) {
+			var p = "div#puzzle table " + TdInput("p", i, j);
 			grid[i][j] = parseInt($(p).val());
 			if (isNaN(grid[i][j]) || grid[i][j] < 1 || grid[i][j] > 9)
 				grid[i][j] = 0;
@@ -26,27 +27,27 @@ function InitializeGrid() {
 }
 
 function CopyPuzzleToDemo() {
-	for (i = 0; i < gridN; i++)
-	for (j = 0; j < gridN; j++) {
-		var d = "div#demo table input#d" + i + j;
+	for (i = 0; i < GridN; i++)
+	for (j = 0; j < GridN; j++) {
+		var d = "div#demo table " + TdInput("d", i, j);
 		if (grid[i][j] != 0)
 			$(d).val(grid[i][j]);
 		else
 			$(d).val("");
 	}
 }
-
+/*
 function IsValidRow() {
-	for (i = 0; i < gridN; i++) {
+	for (i = 0; i < GridN; i++) {
 		var occur = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-		for (j = 0; j < gridN; j++) {
+		for (j = 0; j < GridN; j++) {
 			var value = grid[i][j];
 			if (value != 0) {
 				if (occur[value] == -1)
 					occur[value] = j;
 				else {
-					$("div#demo table td input#d" + i + occur[value]).parent().addClass("conflict");
-					$("div#demo table input#d" + i + j).parent().addClass("conflict");
+					$("div#demo table " + TdInput("d", i, occur[value])).parent().addClass("conflict");
+					$("div#demo table " + TdInput("d", i, j)).parent().addClass("conflict");
 					return false;
 				}
 			}
@@ -56,9 +57,9 @@ function IsValidRow() {
 }
 
 function IsValidCol() {
-	for (j = 0; j < gridN; j++) {
+	for (j = 0; j < GridN; j++) {
 		var occur = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-		for (i = 0; i < gridN; i++) {
+		for (i = 0; i < GridN; i++) {
 			var value = grid[i][j];
 			if (value != 0) {
 				if (occur[value] == -1)
@@ -75,8 +76,8 @@ function IsValidCol() {
 }
 
 function IsValidSquare() {
-	for (si = 0; si < gridN / 3; si++)
-	for (sj = 0; sj < gridN / 3; sj++) {
+	for (si = 0; si < GridN / 3; si++)
+	for (sj = 0; sj < GridN / 3; sj++) {
 		// choose a square
 		var occur = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
 		for (di = 0; di < 3; di++)
@@ -102,7 +103,7 @@ function IsValidSquare() {
 function IsValidPuzzle() {
 	$(".conflict").removeClass("conflict");
 	return IsValidRow() && IsValidCol() && IsValidSquare();
-}
+}*/
 
 function Demo() {
 	$("input#demo").val("Demonstrating").attr("disabled", "disabled");

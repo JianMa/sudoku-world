@@ -1,0 +1,14 @@
+$def with(puzzle, solution)
+
+$var title:	Solve
+$var css:	grid.css solve.css
+$var js:	grid.js
+
+<div>
+	$:gridrender.grid("puzzle", None, "The input sudoku puzzle:", puzzle, "p")
+	$if solution:
+		$:gridrender.grid("solution", None, "One of solutions for the sudoku puzzle:", solution, "s")
+	$else:
+		$:gridrender.grid("solution", None, "No solutions:", solution, "s")
+</div>
+<a href="/solve/"> Input a new puzzle </a>

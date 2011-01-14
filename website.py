@@ -20,14 +20,13 @@ g['gridrender'] = gridrender
 class index:
 	"""The index page: main page shows the links to all the functionality"""
 	def GET(self):
-		web.debug("why?")
 		return render.index()
 
 class solve:
 	"""The solve page: shows a page to solve sudoku in a fast way"""
 	def GET(self):
 		"""displays a page to input a sudoku puzzle"""
-		return render.input()
+		return render.solve_input()
 	
 	def POST(self):
 		"""displays a page to output the the sudoku solutions"""
@@ -42,7 +41,7 @@ class solve:
 		else:
 			mySudoku.resolve()
 		
-		return render.output(mySudoku.solution)
+		return render.solve_output(mySudoku.puzzle, mySudoku.solution)
 
 class replace:
 	"""The replace page: do the map(replace) function by Javascript"""
@@ -56,4 +55,3 @@ class demo:
 
 if __name__ == '__main__':
 	app.run()
-

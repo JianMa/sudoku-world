@@ -3,7 +3,3 @@ div#puzzle, div#demo {
 	width: 480px;
 	vertical-align: top;
 }
-
-div#demo td.conflict {
-	background-color: red;
-}

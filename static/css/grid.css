@@ -45,6 +45,11 @@ div.grid table td.odd {
 	background-color: 6495ed;
 }
 
+/* this one is stronger than even and odd class */
+div.grid table td.cell.conflict {
+	background-color: red;
+}
+
 div.grid table input {
 	border: none;
 	background: transparent;
