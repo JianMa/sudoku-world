@@ -1,5 +1,4 @@
 import copy
-from time import clock
 
 N = 9
 
@@ -88,7 +87,6 @@ class Sudoku:
 			if x == N - 1 and y == N - 1:
 				# succeed to find one solution and exit
 				Print(self.puzzle)
-				print clock()
 				
 				self.solution = copy.deepcopy(self.puzzle)
 				result = True
@@ -124,9 +122,7 @@ class Sudoku:
 		return result
 	
 	def resolve(self):
-		print clock()
 		self.do(0, 0, 1)
-		print clock()
 
 
 if __name__ == '__main__':

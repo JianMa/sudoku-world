@@ -30,6 +30,7 @@ $(document).ready(function() {
 				var type = id.charAt(0);
 				var loc = new Location(parseInt(id.charAt(1)), parseInt(id.charAt(2)));
 				
+				$(TdInput(type, loc.x, loc.y), grid).blur();
 				switch (e.which) {
 					case 37:	// left
 						MoveInBoundary(loc, 0, -1);
@@ -48,12 +49,16 @@ $(document).ready(function() {
 						break;
 						
 					default:
+						$(TdInput(type, loc.x, loc.y), grid).focus();
 						return;
 				}
 				e.preventDefault();
-				$(TdInput(type, loc.x, loc.y), grid).select();
+				$(TdInput(type, loc.x, loc.y), grid).focus();
 			}).keyup(function(e) {
+				$(this).focus();
 				ValidateGrid(grid, type);
+			}).focus(function(e) {
+				$(this).select();
 			});
 		});
 		var type = $("td.cell", grid).attr("id").charAt(0);
