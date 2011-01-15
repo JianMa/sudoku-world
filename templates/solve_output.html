@@ -1,4 +1,4 @@
-$def with(puzzle, solution)
+$def with(puzzle, solution, runtime)
 
 $var title:	Solve
 $var css:	grid.css solve.css
@@ -11,4 +11,5 @@ $var js:	grid.js
 	$else:
 		$:gridrender.grid("solution", None, "No solutions:", solution, "s")
 </div>
+<p> The runtime is <b> ${"%.2f" % runtime} </b> ms </p>
 <a href="/solve/"> Input a new puzzle </a>

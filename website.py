@@ -1,4 +1,6 @@
 import web
+import time
+
 from sudoku import *
 
 urls = (
@@ -32,6 +34,8 @@ class solve:
 		"""displays a page to output the the sudoku solutions"""
 		data = web.input()
 		
+		startTime = time.time()
+		
 		mySudoku = Sudoku()
 		for (i, j) in [(i, j) for i in range(N) for j in range(N)]:
 			value = data.get('p%d%d' % (i, j), None)
@@ -41,7 +45,9 @@ class solve:
 		else:
 			mySudoku.resolve()
 		
-		return render.solve_output(mySudoku.puzzle, mySudoku.solution)
+		endTime = time.time()
+				
+		return render.solve_output(mySudoku.puzzle, mySudoku.solution, (endTime - startTime) * 1000)
 
 class replace:
 	"""The replace page: do the map(replace) function by Javascript"""
