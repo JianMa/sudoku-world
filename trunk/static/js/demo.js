@@ -1,193 +1,232 @@
 // Javascript Document
 
-// TdInput is defined in grid.js
-var grid;
-$(document).ready(function() {
-	$("input#demo").removeAttr("disabled");
-	$("input#demo").click(function() {
-		InitializeGrid();
-		CopyPuzzleToDemo();
-		if (ValidateGrid($("div#puzzle"), "p")) {
-			Demo();
-		}
-	});
-});
+// Grid, TdInput, Location is defined in grid.js
 
-function InitializeGrid() {
-	grid = new Array();
-	for (i = 0; i < GridN; i++) {
-		grid[i] = new Array();
-		for (j = 0; j < GridN; j++) {
-			var p = "div#puzzle " + TdInput("p", i, j);
-			grid[i][j] = parseInt($(p).val());
-			if (isNaN(grid[i][j]) || grid[i][j] < 1 || grid[i][j] > 9)
-				grid[i][j] = 0;
-		}
-	}
-}
-
-function CopyPuzzleToDemo() {
-	for (i = 0; i < GridN; i++)
-	for (j = 0; j < GridN; j++) {
-		var td = "div#demo " + Td("d", i, j);
-		var tdInput = "div#demo " + TdInput("d", i, j);
-		if (grid[i][j] != 0) {
-			$(tdInput).val(grid[i][j]);
-			$(td).addClass("const");
-		} else {
-			$(tdInput).val("");
-			$(td).removeClass("const");
-		}
-	}
-}
-/*
-function IsValidRow() {
-	for (i = 0; i < GridN; i++) {
-		var occur = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-		for (j = 0; j < GridN; j++) {
-			var value = grid[i][j];
-			if (value != 0) {
-				if (occur[value] == -1)
-					occur[value] = j;
-				else {
-					$("div#demo table " + TdInput("d", i, occur[value])).parent().addClass("conflict");
-					$("div#demo table " + TdInput("d", i, j)).parent().addClass("conflict");
-					return false;
-				}
-			}
-		}
-	}
-	return true;
-}
-
-function IsValidCol() {
-	for (j = 0; j < GridN; j++) {
-		var occur = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-		for (i = 0; i < GridN; i++) {
-			var value = grid[i][j];
-			if (value != 0) {
-				if (occur[value] == -1)
-					occur[value] = i;
-				else {
-					$("div#demo table td input#d" + occur[value] + j).parent().addClass("conflict");
-					$("div#demo table input#d" + i + j).parent().addClass("conflict");
-					return false;
-				}
-			}
-		}
-	}
-	return true;
-}
-
-function IsValidSquare() {
-	for (si = 0; si < GridN / 3; si++)
-	for (sj = 0; sj < GridN / 3; sj++) {
-		// choose a square
-		var occur = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-		for (di = 0; di < 3; di++)
-		for (dj = 0; dj < 3; dj++) {
-			var i = si * 3 + di, j = sj * 3 + dj;
-			var value = grid[i][j];
-			if (value != 0) {
-				if (occur[value] == -1)
-					occur[value] = di * 3 + dj;
-				else {
-					oi = si * 3 + parseInt(occur[value] / 3);
-					oj = sj * 3 + occur[value] % 3;
-					$("div#demo table td input#d" + oi + oj).parent().addClass("conflict");
-					$("div#demo table input#d" + i + j).parent().addClass("conflict");
-					return false;
-				}
-			}
-		}
-	}
-	return true;
-}
-
-function IsValidPuzzle() {
-	$(".conflict").removeClass("conflict");
-	return IsValidRow() && IsValidCol() && IsValidSquare();
-}*/
-
-function ValidateDemoForRow(x, value) {
-	var result = true;
+function ValidateRow(fgrid, grid, x, y, value) {
+	var valid = true;
 	for (j = 0; j < GridN; j++)
-		if (j != y && grid[x][j] == value) {
-			$("div#demo " + Td("d", x, j)).addClass("conflict");
-			result = false;
+		if (j != y && grid[x][j].value == value) {
+			fgrid.jTd(x, j).conflict();
+			valid = false;
 		}
-	return result;
+	return valid;
 }
 
-function ValidateDemoForCol(y, value) {
-	var result = true;
+function ValidateCol(fgrid, grid, x, y, value) {
+	var valid = true;
 	for (i = 0; i < GridN; i++)
-		if (i != x && grid[i][y] == value) {
-			$("div#demo " + Td("d", i, y)).addClass("conflict");
-			result = false;
+		if (i != x && grid[i][y].value == value) {
+			fgrid.jTd(i, y).conflict();
+			valid = false;
 		}
-	return result;
+	return valid;
 }
 
-function ValidateDemoForSquare(x, y, value) {
-	var result = true;
+function ValidateSquare(fgrid, grid, x, y, value) {
+	var valid = true;
 	var si = parseInt(x / 3) * 3;
 	var sj = parseInt(y / 3) * 3;
 	
 	for (i = si; i < si + 3; i++)
 	for (j = sj; j < sj + 3; j++)
-		if ((i != x || j != y) && grid[i][j] == value) {
-			$("div#demo " + Td("d", i, j)).addClass("conflict");
-			result = false;
+		if ((i != x || j != y) && grid[i][j].value == value) {
+			fgrid.jTd(i, j).conflict();
+			valid = false;
 		}
-	return result;
+	return valid;
 }
 
-function ValidateDemo(x, y, value) {
-	$("div#demo td.conflict").removeClass("conflict");
-	
-	var isValidRow = ValidateDemoForRow(x, value);
-	var isValidCol = ValidateDemoForCol(y, value);
-	var isValidSquare = ValidateDemoForSquare(x, y, value);
-	
-	return isValidRow && isValidCol && isValidSquare;
+function ValidateGrid(fgrid, grid, x, y, value) {
+	var valid =	ValidateRow(fgrid, grid, x, y, value) &&
+				ValidateCol(fgrid, grid, x, y, value) &&
+				ValidateSquare(fgrid, grid, x, y, value);
+	if (!valid)
+		fgrid.jTd(x, y).conflict();
+	return valid;
 }
 
-function Do(x, y) {
-	var result = false;
-	while (grid[x][y] != 0) {
-		if (x == GridN - 1 && y == GridN - 1) {
-			return true;
-		} else {
-			y += 1;
-			if (y == GridN) {
-				x += 1;
-				y = 0;
-			}
+
+// class Cell: represents a cell in the grid
+function Cell(value, preset) {
+	this.value = value;
+	this.preset = preset;
+}
+
+
+// class Demo: handles demonstration
+function Demo(inFgrid, outFgrid) {
+	this.inFgrid = inFgrid;
+	this.outFgrid = outFgrid;
+	
+	this.MovePrev = MovePrev;
+	this.MoveNext = MoveNext;
+	// inner grid
+	this.grid = new Array();
+	this.loc = new Location(0, 0);
+	
+	// timer
+	this.interval = 500;
+	this.timer = null;
+	
+	for (i = 0; i < GridN; i++) {
+		this.grid[i] = new Array();
+		for (j = 0; j < GridN; j++) {
+			var value = parseInt(this.inFgrid.jTdInput(i, j).val());
+			if (isNaN(value) || value < 1 || value > 9)
+				this.grid[i][j] = new Cell(0, false);
+			else
+				this.grid[i][j] = new Cell(value, true);
 		}
 	}
+	if (this.grid[0][0].preset)
+		this.initial = !this.MoveNext(this.loc);
+	else
+		this.initial = false;
 	
-	var value;
-	for (value = 1; value < GridN + 1; value++)
-		if (ValidateDemo(x, y, value)) {
-			$("div#demo " + TdInput("d", x, y)).val(value);
-			//alert(value);
-			grid[x][y] = value;
-			result = result || Do(x, y)
-			if (result)
-				break;
-			$("div#demo " + TdInput("d", x, y)).val("");
-			grid[x][y] = 0;
-		} else
-			$("div#demo " + Td("d", x, y)).addClass("conflict");
-	return result;
+	
+	// move loc to last non-preset cell location
+	function MovePrev(loc) {
+		do {
+			loc.y--;
+			if (loc.y < 0) {
+				loc.x--;
+				loc.y = GridN - 1;
+			}
+			if (loc.x < 0)
+				return false;
+		} while(this.grid[loc.x][loc.y].preset);
+		return true;
+	}
+	
+	// move loc to next non-preset cell location
+	function MoveNext(loc) {
+		do {
+			loc.y++;
+			if (loc.y >= GridN) {
+				loc.x++;
+				loc.y = 0;
+			}
+			if (loc.x >= GridN)
+				return false;
+		} while(this.grid[loc.x][loc.y].preset);
+		return true;
+	}
 }
 
-function Demo() {
-	// avoid double-clicking the Demo button during demonstrating
-	$("input#demo").val("Demonstrating").attr("disabled", "disabled");
-	
-	Do(0, 0);
-	
-	$("input#demo").val("Demo").removeAttr("disabled");
+
+function IsValidLoc(loc) {
+	return 0 <= loc && loc < GridN;
 }
+
+
+
+// returning false means end (it can be either successful or unsuceessful)
+// returning true means a try
+Demo.prototype.Next = function() {
+	if (!IsValidLoc(this.loc.x) || !IsValidLoc(this.loc.y))
+		return false;
+	
+	var cell = this.grid[this.loc.x][this.loc.y];
+	cell.value = (cell.value + 1) % (GridN + 1);
+	
+	$("td.conflict", this.outJgrid).resolved();
+	this.outFgrid.SetValue(this.loc.x, this.loc.y, cell.value);
+	
+	if (cell.value == 0)
+		return this.MovePrev(this.loc);
+	else {
+		if (!ValidateGrid(this.outFgrid, this.grid, this.loc.x, this.loc.y, cell.value))
+			return true;
+		else
+			return this.MoveNext(this.loc);
+	}
+}
+
+function run(demo, callback) {
+	if (demo.Next()) {
+		demo.timer = setTimeout(function() {
+			run(demo, callback);
+		}, demo.interval);
+	} else
+		callback();
+}
+
+Demo.prototype.Start = function(callback) {
+	run(this, callback);
+}
+
+Demo.prototype.Stop = function() {
+	clearTimeout(this.timer);
+}
+
+Demo.prototype.Pause = function() {
+	clearTimeout(this.timer);
+}
+
+Demo.prototype.Continue = function(callback) {
+	run(this, callback);
+}
+
+function DemoController(enableStart, enableStop, enablePause, enableContinue) {
+	if (enableStart)
+		$("input#start").removeAttr("disabled");
+	else
+		$("input#start").attr("disabled", "disabled");
+	
+	if (enableStop)
+		$("input#stop").removeAttr("disabled");
+	else
+		$("input#stop").attr("disabled", "disabled");
+	
+	if (enablePause)
+		$("input#pause").removeAttr("disabled");
+	else
+		$("input#pause").attr("disabled", "disabled");
+	
+	if (enableContinue)
+		$("input#continue").removeAttr("disabled");
+	else
+		$("input#continue").attr("disabled", "disabled");
+}
+
+
+function end() {
+	DemoController(true, false, false, false);
+	alert("finished demo!");
+}
+
+var demo = null;
+$(document).ready(function() {
+	var inFgrid = null;
+	var outFgrid = null;
+	
+	DemoController(true, false, false, false);
+	// demo should listen to ValidateJgrid change
+	// button should be disabled if ValidateJgrid is false
+	$("input#start").click(function() {
+		DemoController(true, true, true, false);
+		
+		inFgrid = new Fgrid($("div#puzzle"), "p", null);
+		if (!ValidateJgrid($("div#puzzle"), "p"))
+			return;
+		outFgrid = new Fgrid($("div#demo"), "d", inFgrid.grid);
+		
+		demo = new Demo(inFgrid, outFgrid);
+		demo.Start(end);
+	});
+	
+	$("input#stop").click(function() {
+		DemoController(true, false, false, false);
+		demo.Stop();
+	});
+	
+	$("input#pause").click(function() {
+		DemoController(true, true, false, true);
+		demo.Pause();
+	});
+	
+	$("input#continue").click(function() {
+		DemoController(true, true, true, false);
+		demo.Continue(end);
+	});
+});

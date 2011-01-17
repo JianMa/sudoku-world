@@ -1,6 +1,6 @@
 import copy
 
-N = 9
+GridN = 9
 
 def squ(x, y):
 	return x // 3 * 3 + y // 3
@@ -8,11 +8,11 @@ def squ(x, y):
 def Print(puzzle):
 	print '     0 1 2   3 4 5   6 7 8'
 	print '  ||=======================||'
-	for x in range(N):
+	for x in range(GridN):
 		if x and x % 3 == 0:
 			print '  ||-----------------------||'
 		print '%d ||' % x,
-		for y in range(N):
+		for y in range(GridN):
 			if y and y % 3 == 0:
 				print '|',
 			print puzzle[x][y] if puzzle[x][y] else '_',
@@ -20,17 +20,17 @@ def Print(puzzle):
 	print '  ||=======================||'
 
 def PrintPossible(possible):
-	for i in range(N):
-		for j in range(N):
+	for i in range(GridN):
+		for j in range(GridN):
 			print '(%d, %d)' % (i, j), possible[i][j]
 	
 
 c = 0
 class Sudoku:
 	def __init__(self):
-		self.puzzle = [[0] * N for i in range(N)]
-		self.possible = [[range(1, N + 1) for j in range(N)] for i in range(N)]
-		self.step = [[0] * N for i in range(N)]
+		self.puzzle = [[0] * GridN for i in range(GridN)]
+		self.possible = [[range(1, GridN + 1) for j in range(GridN)] for i in range(GridN)]
+		self.step = [[0] * GridN for i in range(GridN)]
 		
 		self.solution = None
 		self.debug = False
@@ -47,14 +47,14 @@ class Sudoku:
 			return False
 		
 		self.puzzle[x][y] = value
-		for j in range(N):
+		for j in range(GridN):
 			possible = self.possible[x][j]
 			if value in possible:
 				possible.remove(value)
 				if not possible:
 					return False
 		
-		for i in range(N):
+		for i in range(GridN):
 			possible = self.possible[i][y]
 			if value in possible:
 				possible.remove(value)
@@ -71,8 +71,8 @@ class Sudoku:
 					if not possible:
 						return False
 		
-		for i in range(N):
-			for j in range(N):
+		for i in range(GridN):
+			for j in range(GridN):
 				possible = self.possible[i][j]
 				if len(possible) == 1:
 					if not self.setValue(i, j, possible[0], step):
@@ -84,7 +84,7 @@ class Sudoku:
 		result = False
 		
 		while not self.possible[x][y]:
-			if x == N - 1 and y == N - 1:
+			if x == GridN - 1 and y == GridN - 1:
 				# succeed to find one solution and exit
 				Print(self.puzzle)
 				
@@ -93,22 +93,22 @@ class Sudoku:
 				break
 			else:
 				y += 1
-				if y >= N:
+				if y >= GridN:
 					x += 1
 					y = 0
 		else:
 			# backup possible
-			backupPossible = [[None] * N for i in range(N)]
-			for i in range(N):
-				for j in range(N):
+			backupPossible = [[None] * GridN for i in range(GridN)]
+			for i in range(GridN):
+				for j in range(GridN):
 					backupPossible[i][j] = copy.copy(self.possible[i][j])
 			
 			for value in backupPossible[x][y]:
 				if self.setValue(x, y, value, step = step):
 					result = result or self.do(x, y, step + 1)
 				
-				for i in range(N):
-					for j in range(N):
+				for i in range(GridN):
+					for j in range(GridN):
 						# restore possible for the whole puzzle
 						self.possible[i][j] = copy.copy(backupPossible[i][j])
 						# restore the values for the step, avoiding to backup puzzle
@@ -194,8 +194,8 @@ if __name__ == '__main__':
 	print 'puzzle'
 	Print(mySudoku.puzzle)
 	"""
-	for i in range(N):
-		for j in range(N):
+	for i in range(GridN):
+		for j in range(GridN):
 			print '(%d, %d)' % (i, j), mySudoku.possible[i][j]
 	"""
 	print c
