@@ -14,7 +14,7 @@ g = globals()
 app = web.application(urls, globals())
 render = web.template.render('templates', globals = g, base = 'base')
 gridrender = web.template.render('templates', globals = g, builtins = __builtins__)
-g['N'] = N
+g['GridN'] = GridN
 g['squ'] = squ
 g['gridrender'] = gridrender
 
@@ -37,7 +37,7 @@ class solve:
 		startTime = time.time()
 		
 		mySudoku = Sudoku()
-		for (i, j) in [(i, j) for i in range(N) for j in range(N)]:
+		for (i, j) in [(i, j) for i in range(GridN) for j in range(GridN)]:
 			value = data.get('p%d%d' % (i, j), None)
 			value = int(value) if value else 0
 			if value and not mySudoku.setValue(i, j, value):

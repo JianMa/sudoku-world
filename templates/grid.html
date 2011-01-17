@@ -9,21 +9,23 @@ $def with(id, gridclass, caption, grid, type)
 			<tr>
 				<td>
 				</td>
-			$for j in range(N):
+			$for j in range(GridN):
+				$# column are labled from 1 to 9
 				<td class="coordinate">
 					$(j + 1)
 				</td>
 			</tr>
 			
-		$for i in range(N):
+		$for i in range(GridN):
 			<tr>
+				$# rows are labled from A to I
 				<td class="coordinate">
 					$(chr(ord('A') + i))
 				</td>
 				
 				$ classtop = " topborder" if i % 3 == 0 else ""
 				$ classbottom = " bottomborder" if i % 3 == 2 else ""
-			$for j in range(N):
+			$for j in range(GridN):
 				$ classleft = " leftborder" if j % 3 == 0 else ""
 				$ classright = " rightborder" if j % 3 == 2 else ""
 				$ classsquare = " even" if squ(i, j) % 2 == 0 else " odd"
