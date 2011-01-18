@@ -5,11 +5,51 @@ $var css:	grid.css demo.css
 $var js:	grid.js demo.js
 
 <div>
-	$:gridrender.grid("puzzle", "editable", "Input the sudoku puzzle to demo:", None, "p")
-	$:gridrender.grid("demo", None, "Click 'Demo' to see the proecess:", None, "d")
+	$:gridrender.grid("puzzle", "Input the sudoku puzzle to demo:", None, "p")
+	$:gridrender.grid("demo", "Click 'Demo' to see the proecess:", None, "d")
 </div>
 
-<input id="start" type="button" value="Start" />
-<input id="stop" type="button" value="Stop" />
-<input id="pause" type="button" value="Pause" />
-<input id="continue" type="button" value="Continue" />
+<div id="controller">
+	<div id="status">
+		<span id="title"> Status: </span>
+		<span id="name"> Ready </span>
+		<span id="result"> </span>
+	</div>
+	
+	<input id="start" type="button" value="Start" />
+	<input id="stop" type="button" value="Stop" />
+	<input id="pause" type="button" value="Pause" />
+	<input id="continue" type="button" value="Continue" />
+	
+	<table id="instruction">
+		<caption>
+			Instructions:
+		</caption>
+		<tbody>
+			<tr>
+				<td class="title"> Start </td>
+				<td class="content">
+					When Status is "Ready", click it to start the demo on the right and change Status to "Running"
+				</td>
+			</tr>
+			<tr>
+				<td class="title"> Stop </td>
+				<td class="content">
+					When Status is "Running" or "Pausing", click it to stop the demo and change Status to "Ready"
+				</td>
+			</tr>
+			<tr>
+				<td class="title"> Pause </td>
+				<td class="content">
+					When Status is "Running", click it to pause the demo and change Status to "Pausing"
+				</td>
+			</tr>
+			<tr>
+				<td class="title"> Continue </td>
+				<td class="content">
+					When Status is "Pausing", click it to continue demo and change Status to "Running"
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

@@ -1,28 +1,29 @@
 // Javascript code
 
-// TdInput is defined in grid.js
-
-var map;
 $(document).ready(function() {
+	var pFgrid = new Fgrid($("div#puzzle"), "p");
+	var rFgrid = new Fgrid($("div#replace"), "r");
+	
+	pFgrid.RegisterEditable();
+	rFgrid.Register();
+	
 	$("#submit").click(function() {
 		// get map
-		map = new Array();
-		for (i = 1; i < GridN + 1; i++) {
-			var key = i.toString();
-			var value = $("div#map input#" + i).val();
-			if (value != "")
+		var map = new Array();
+		map[0] = "";
+		for (var key = 1; key < GridN + 1; key++) {
+			var value = $("div#map input#" + key).val();
+			if (IsValidValue(value))
 				map[key] = value;
+			else
+				map[key] = "";
 		}
 		
 		// map the original to target
-		for (i = 0; i < GridN; i++)
-			for (j = 0; j < GridN; j++) {
-				var key = $("div#puzzle " + TdInput("p", i, j)).val();
-				
-				if (key in map)
-					$("div#solution " + TdInput("s", i, j)).val(map[key]);
-				else
-					$("div#solution " + TdInput("s", i, j)).val(key);
-			}
+		for (var i = 0; i < GridN; i++)
+		for (var j = 0; j < GridN; j++) {
+			var key = pFgrid.value(i, j);		// key must be in 0 - 9
+			rFgrid.value(i, j, map[key]);
+		}
 	});
 });

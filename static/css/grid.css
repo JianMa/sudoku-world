@@ -54,7 +54,12 @@ div.grid table td.cell.const {
 	background-color: grey;
 }
 
-div.grid table input {
+div.grid table td.cell input {
 	border: none;
 	background: transparent;
+}
+
+div.grid input.gridEmpty {
+	display: inline-block;
+	margin: 5px auto;
 }

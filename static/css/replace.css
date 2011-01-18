@@ -1,10 +1,10 @@
-div#puzzle, div#map, div#solution {
+div#puzzle, div#map, div#replace {
 	display: inline-block;
 	height: 400px;
 	vertical-align: top;
 }
 
-div#puzzle, div#solution {
+div#puzzle, div#replace {
 	width: 400px;
 }
 

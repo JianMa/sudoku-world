@@ -3,3 +3,36 @@ div#puzzle, div#demo {
 	width: 480px;
 	vertical-align: top;
 }
+
+
+div#controller {
+	margin-top: 20px;
+}
+
+div#controller div#status span#title,
+div#controller div#status span#name {
+	display: inline-block;
+	width: 80px;
+}
+
+div#controller div#status span#result {
+	display: block;
+	width: 300px;
+	color: red;
+	margin: auto;
+}
+
+div#controller table#instruction {
+	width: 900px;
+	margin: 0px auto;
+}
+
+div#controller table#instruction td.title {
+	width: 100px;
+	text-align: left;
+}
+
+div#controller table#instruction td.content {
+	width: auto;
+	text-align: left;
+}
