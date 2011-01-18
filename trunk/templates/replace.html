@@ -4,7 +4,7 @@ $var title:	Replace
 $var css:	grid.css replace.css
 $var js:	grid.js replace.js
 
-$:gridrender.grid("puzzle", "editable", "Input the sudoku puzzle to replace:", None, "p")
+$:gridrender.grid("puzzle", "Input the sudoku puzzle to replace:", None, "p")
 
 <div id="map">
 	<table>
@@ -12,7 +12,7 @@ $:gridrender.grid("puzzle", "editable", "Input the sudoku puzzle to replace:", N
 			Replace Rules:
 		</caption>
 		<tbody>
-		$for i in range(1, N + 1):
+		$for i in range(1, GridN + 1):
 			<tr>
 				<td>
 					$i
@@ -29,5 +29,5 @@ $:gridrender.grid("puzzle", "editable", "Input the sudoku puzzle to replace:", N
 	<input id="submit" type="button" value="Submit">
 </div>
 
-$:gridrender.grid("solution", None, "Click 'Submit' to get replacement:", None, "s")
+$:gridrender.grid("replace", "Click 'Submit' to get replacement:", None, "r")
 

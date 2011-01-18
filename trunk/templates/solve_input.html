@@ -2,12 +2,12 @@ $def with()
 
 $var title:	Solve
 $var css:	grid.css solve.css
-$var js:	grid.js
+$var js:	grid.js solve.js
 
 <form action="/solve/" method="post">
 	<div>
-		$:gridrender.grid("puzzle", "editable", "Input the sudoku puzzle to solve:", None, "p")
-		$:gridrender.grid("solution", None, "Click 'Submit' to get the solution:", None, "s")
+		$:gridrender.grid("puzzle", "Input the sudoku puzzle to solve:", None, "p")
+		$:gridrender.grid("solution", "Click 'Submit' to get the solution:", None, "s")
 	</div>
 	
 	<input type="submit" value="Submit" />

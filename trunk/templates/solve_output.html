@@ -5,11 +5,11 @@ $var css:	grid.css solve.css
 $var js:	grid.js
 
 <div>
-	$:gridrender.grid("puzzle", None, "The input sudoku puzzle:", puzzle, "p")
+	$:gridrender.grid("puzzle", "The input sudoku puzzle:", puzzle, "p")
 	$if solution:
-		$:gridrender.grid("solution", None, "One of solutions for the sudoku puzzle:", solution, "s")
+		$:gridrender.grid("solution", "One of solutions for the sudoku puzzle:", solution, "s")
 	$else:
-		$:gridrender.grid("solution", None, "No solutions:", solution, "s")
+		$:gridrender.grid("solution", "No solutions:", solution, "s")
 </div>
 <p> The runtime is <b> ${"%.2f" % runtime} </b> ms </p>
 <a href="/solve/"> Input a new puzzle </a>
