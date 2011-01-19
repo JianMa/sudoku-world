@@ -48,7 +48,7 @@ Demo.prototype.MoveNext = function(loc) {
 }
 
 Demo.prototype.IsPreset = function(x, y) {
-	return this.inFgrid.value(x, y) != "";
+	return this.inFgrid.value(x, y) != 0;
 }
 
 Demo.prototype.ResetLoc = function() {
@@ -139,7 +139,6 @@ Demo.prototype.ChangeStatus = function(status) {
 			$("div#status span#name").text("Ready");
 			this.Controller(true, false, false, false);
 			this.Stop();
-			this.ResetLoc();
 			break;
 			
 		case DemoStatus.Running:
@@ -180,6 +179,7 @@ $(document).ready(function() {
 	
 	$("input#start").click(function() {
 		demo.CopyToOut();
+		demo.ResetLoc();
 		demo.ChangeStatus(DemoStatus.Running);
 	});
 	
