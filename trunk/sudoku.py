@@ -39,6 +39,9 @@ class Sudoku:
 		global c
 		c += 1
 		
+		if not self.possible[x][y] and self.puzzle[x][y] == value:
+			return True
+		
 		if value in self.possible[x][y]:
 			self.puzzle[x][y] = value
 			self.possible[x][y] = []
